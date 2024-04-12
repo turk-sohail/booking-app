@@ -5,9 +5,10 @@ const { logger } = require("./src/config");
 
 const { serverConfig } = require("./src/config");
 const PORT = serverConfig.PORT;
+app.use(express.json());
 
 app.use("/api", apiRoutes);
 
 app.listen(PORT, () => {
-  logger.info(`successfully running on port ${PORT}`, "root", {});
+	logger.info(`successfully running on port ${PORT}`, "root", {});
 });
