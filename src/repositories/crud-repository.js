@@ -36,6 +36,7 @@ class CrudRepository {
 			where: { id },
 		});
 		return response;
+		console.log(response);
 	}
 }
 
