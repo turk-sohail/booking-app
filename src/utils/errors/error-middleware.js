@@ -12,6 +12,10 @@ const errorHandler = (error, request, response, next) => {
 		return response
 			.status(StatusCodes.BAD_REQUEST)
 			.json({ error: error.message });
+	} else if (error.name == "AppError") {
+		return response
+			.status(StatusCodes.BAD_REQUEST)
+			.json({ error: error.message });
 	}
 
 	next(error);
