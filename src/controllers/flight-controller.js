@@ -28,7 +28,6 @@ async function createFlight(req, res) {
 
 		return res.status(StatusCodes.CREATED).json(SuccessResponse);
 	} catch (error) {
-		console.log(error);
 		if (error) {
 			ErrorResponse.error = error;
 			ErrorResponse.message = error.explanation;
@@ -38,86 +37,22 @@ async function createFlight(req, res) {
 	}
 }
 
-/**
- * GET
- * /airports
- * @param {} req
- *
- * @returns airports
- */
+async function getAllFlights(req, res) {
+	try {
+		const response = await flightService.getAllFlights(req.query);
+		SuccessResponse.data = response;
 
-// async function getAirports(req, res) {
-// 	try {
-// 		const response = await airportService.getAirports();
-// 		SuccessResponse.data = response;
-
-// 		return res.status(StatusCodes.OK).json(SuccessResponse);
-// 	} catch (error) {
-// 		ErrorResponse.error = error;
-// 		return res.status(error.status).json(ErrorResponse);
-// 	}
-// }
-
-/**
- */
-
-// async function getAirport(req, res) {
-// 	const { id } = req.params;
-
-// 	try {
-// 		const response = await airportService.getAirport(id);
-// 		SuccessResponse.data = response;
-// 		return res.status(StatusCodes.OK).json(SuccessResponse);
-// 	} catch (error) {
-// 		ErrorResponse.error = error;
-// 		res.status(error.statusCode).json({ ErrorResponse });
-// 	}
-// }
-
-// /** DELETE
-//  *  /airports/:id
-//  * @param {id} req
-//  * @returns OK
-//  */
-
-// async function deleteAirport(req, res) {
-// 	const { id } = req.params;
-
-// 	try {
-// 		const response = await airportService.deleteAirport(id);
-// 		SuccessResponse.data = response;
-// 		return res.status(StatusCodes.OK).json(SuccessResponse);
-// 	} catch (error) {
-// 		ErrorResponse.error = error;
-// 		res.status(error.statusCode).json({ ErrorResponse });
-// 	}
-// }
-
-// /**
-//  * PATCH /airports
-//  * @param {id} req
-//  * @param {*} res
-//  * @returns
-//  */
-
-// async function updateAirport(req, res) {
-// 	const { id } = req.params;
-// 	const { modelNumber, capacity } = req.body;
-
-// 	try {
-// 		const response = await airportService.updateAirport(id, {
-// 			modelNumber,
-// 			capacity,
-// 		});
-// 		console.log(response);
-// 		SuccessResponse.data = response;
-// 		return res.status(StatusCodes.OK).json(SuccessResponse);
-// 	} catch (error) {
-// 		ErrorResponse.error = error;
-// 		res.status(error.statusCode).json({ ErrorResponse });
-// 	}
-// }
+		return res.status(StatusCodes.OK).json(SuccessResponse);
+	} catch (error) {
+		ErrorResponse.error = error;
+		ErrorResponse.message = error.explanation;
+		console.log(error);
+		return res.status(error.statusCode).json(ErrorResponse);
+		throw error;
+	}
+}
 
 module.exports = {
 	createFlight,
+	getAllFlights,
 };
