@@ -9,7 +9,6 @@ const { Op } = require("sequelize");
 async function createFlight(data) {
 	const { departureTime, arrivalTime } = data;
 	const isGreater = compareTime(departureTime, arrivalTime);
-	console.log(isGreater);
 	if (isGreater) {
 		throw new AppError(
 			"Departure time cannot be greater the arrival Time",
@@ -66,7 +65,10 @@ async function getAllFlights(query, filters) {
 	}
 
 	try {
-		const flights = await flightRepository.getAllFlights(customFilter);
+		const flights = await flightRepository.getAllFlights(
+			customFilter,
+			sortFilter
+		);
 		return flights;
 	} catch (error) {
 		console.log(error);
