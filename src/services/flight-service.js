@@ -32,7 +32,7 @@ async function getAllFlights(query, filters) {
 	const endingTripTime = "23:59:00";
 	//ISB-KAR
 	if (query.trips) {
-		[departureAirportId, arrivalAirportId] = query.trips.split("-");
+		[departureAirportId, arrivalAirportId] = query.trips.split(">");
 		customFilter.departureAirportId = departureAirportId;
 		customFilter.arrivalAirportId = arrivalAirportId;
 		if (customFilter.arrivalAirportId === customFilter.departureAirportId) {

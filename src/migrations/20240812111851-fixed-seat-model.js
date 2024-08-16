@@ -1,5 +1,4 @@
 "use strict";
-
 const { Enums } = require("../utils");
 const { BUSINESS, ECONOMY } = Enums.SEAT_TYPE;
 
@@ -34,7 +33,7 @@ module.exports = {
 				type: Sequelize.ENUM,
 				allowNull: false,
 				values: [BUSINESS, ECONOMY],
-				default: ECONOMY,
+				defaultValue: ECONOMY,
 			},
 			createdAt: {
 				allowNull: false,
@@ -46,7 +45,13 @@ module.exports = {
 			},
 		});
 	},
+
 	async down(queryInterface, Sequelize) {
-		await queryInterface.dropTable("Seats");
+		/**
+		 * Add reverting commands here.
+		 *
+		 * Example:
+		 * await queryInterface.dropTable('users');
+		 */
 	},
 };
