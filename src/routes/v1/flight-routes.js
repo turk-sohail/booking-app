@@ -7,7 +7,12 @@ router
   .route("/")
   .post(FlightMiddleware.validateCreateRequest, flightController.createFlight)
   .get(flightController.getAllFlights)
-  .route("/id")
   .get(flightController.getFlight);
+
+router.patch(
+  "/:id/seats",
+  FlightMiddleware.validateUpdateSeatsRequest,
+  flightController.updateSeats
+);
 
 module.exports = router;
